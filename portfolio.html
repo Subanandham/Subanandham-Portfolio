@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subanandham E R — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: #2a2a35;
+    --accent: #00e5c3;
+    --accent2: #6c63ff;
+    --accent3: #ff6b6b;
+    --text: #e8e8f0;
+    --muted: #7878a0;
+    --card: #13131b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,195,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,195,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    bottom: 10%;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0,229,195,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 900px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,229,195,0.08);
+    border: 1px solid rgba(0,229,195,0.2);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-name .accent-word {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-roles {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .role-pill {
+    padding: 0.3rem 0.9rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .role-pill.cloud { background: rgba(108,99,255,0.15); color: #9d96ff; border: 1px solid rgba(108,99,255,0.3); }
+  .role-pill.data { background: rgba(0,229,195,0.1); color: var(--accent); border: 1px solid rgba(0,229,195,0.25); }
+  .role-pill.xr { background: rgba(255,107,107,0.1); color: #ff9090; border: 1px solid rgba(255,107,107,0.25); }
+
+  .hero-bio {
+    margin-top: 2rem;
+    max-width: 640px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-ctas {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0f;
+    padding: 0.75rem 1.8rem;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+
+  .btn-primary:hover { background: #00c9ac; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,195,0.3); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 0.75rem 1.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    margin-top: 4rem;
+    display: flex;
+    gap: 3rem;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+
+  .stat { }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION ── */
+  section {
+    padding: 6rem 4rem;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--surface); }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.5rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  .timeline-item.purple::before { background: var(--accent2); box-shadow: 0 0 12px var(--accent2); }
+  .timeline-item.red::before { background: var(--accent3); box-shadow: 0 0 12px var(--accent3); }
+
+  .job-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .job-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .job-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .job-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+  }
+
+  .job-company {
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-top: 0.2rem;
+  }
+
+  .job-period {
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .job-desc {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .job-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .job-bullets li {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .job-bullets li::before {
+    content: '▸';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .job-bullets li.purple::before { color: var(--accent2); }
+  .job-bullets li.red::before { color: var(--accent3); }
+
+  .job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tag.green { background: rgba(0,229,195,0.08); color: var(--accent); border: 1px solid rgba(0,229,195,0.2); }
+  .tag.purple { background: rgba(108,99,255,0.08); color: #9d96ff; border: 1px solid rgba(108,99,255,0.2); }
+  .tag.red { background: rgba(255,107,107,0.08); color: #ff9090; border: 1px solid rgba(255,107,107,0.2); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .skill-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .skill-icon.cloud { background: rgba(108,99,255,0.15); }
+  .skill-icon.data { background: rgba(0,229,195,0.1); }
+  .skill-icon.xr { background: rgba(255,107,107,0.1); }
+  .skill-icon.dev { background: rgba(255,200,50,0.1); }
+
+  .skill-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-pill {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+
+  .skill-pill:hover { background: rgba(0,229,195,0.08); border-color: rgba(0,229,195,0.3); color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--surface); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .project-card:hover { border-color: rgba(0,229,195,0.3); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .project-category {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    background: rgba(0,229,195,0.08);
+    border: 1px solid rgba(0,229,195,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .project-icon { font-size: 1.5rem; }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .project-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-bullets li {
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .project-bullets li::before {
+    content: '→';
+    color: var(--accent2);
+    flex-shrink: 0;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tech-chip {
+    font-size: 0.63rem;
+    padding: 0.18rem 0.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── EDUCATION & CERTS ── */
+  #education { background: var(--bg); }
+
+  .edu-certs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .edu-certs-grid { grid-template-columns: 1fr; }
+  }
+
+  .edu-card, .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .sub-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .edu-degree {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .edu-school {
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+  }
+
+  .edu-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .edu-meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .edu-meta-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .edu-meta-value { font-size: 0.88rem; color: var(--text); font-weight: 500; margin-top: 0.2rem; }
+  .edu-meta-value.highlight { color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .cert-item:hover { border-color: var(--accent2); }
+
+  .cert-badge {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: rgba(108,99,255,0.15);
+    border: 1px solid rgba(108,99,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .cert-name { font-size: 0.82rem; color: var(--text); }
+  .cert-issuer { font-size: 0.7rem; color: var(--muted); }
+
+  /* ── LANGUAGES ── */
+  .languages-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .lang-card {
+    flex: 1;
+    min-width: 140px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .lang-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); }
+  .lang-level { font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .lang-dots {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 0.8rem;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .dot.filled { background: var(--accent); }
+  .dot.half { background: var(--accent2); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+  }
+
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .contact-link-icon { font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Think Simple Work Smart</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to Opportunities</div>
+    <h1 class="hero-name">
+      Subanandham
+      <span class="accent-word">E R</span>
+    </h1>
+    <div class="hero-roles">
+      <span class="role-pill cloud">☁ Cloud Engineer</span>
+      <span class="role-pill data">⚡ Data Engineer</span>
+      <span class="role-pill xr">🥽 AR/VR Developer</span>
+    </div>
+    <p class="hero-bio">
+      Technology professional with 2+ years of experience spanning cloud infrastructure, data engineering, and immersive application development. Skilled in building scalable ETL pipelines, administering enterprise environments, and crafting interactive XR experiences — driven by a systems-first mindset and a hunger for continuous learning.
+    </p>
+    <div class="hero-ctas">
+      <a href="mailto:subanandham09@gmail.com" class="btn-primary">✉ Get in Touch</a>
+      <a href="https://www.linkedin.com/in/subanandham-e-r-21a8b8245/" target="_blank" class="btn-secondary">↗ LinkedIn</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Domains</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Projects Built</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8.7</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- L2 Cloud Engineer -->
+    <div class="timeline-item reveal">
+      <div class="job-card">
+        <div class="job-top">
+          <div>
+            <div class="job-title">L2 Cloud Engineer <span style="color:var(--muted);font-weight:400;font-size:0.85rem;">— Client Location</span></div>
+            <div class="job-company">SIFY Technologies Limited</div>
+          </div>
+          <span class="job-period">Sep 2025 – Present</span>
+        </div>
+        <p class="job-desc">Serving as a senior cloud operations engineer embedded at a client site, owning end-to-end infrastructure reliability and virtualization lifecycle across hybrid environments.</p>
+        <ul class="job-bullets">
+          <li>Implemented monitoring and alerting using Nimsoft and Zabbix to enable proactive incident management, reducing mean time to detect (MTTD) by 35%</li>
+          <li>Managed full VMware vSphere lifecycle — VM provisioning, cloning, snapshot management, and resource optimization — across ESXi and vCenter Server clusters</li>
+          <li>Executed vMotion, HA failover, and DRS balancing to ensure zero-downtime operations for production workloads</li>
+          <li>Automated routine administrative workflows using PowerShell and basic Terraform IaC, eliminating repetitive manual tasks and improving team velocity</li>
+          <li>Performed incident management, RCA, and multi-platform troubleshooting (Windows, Azure, VMware) via ServiceNow/CA ticketing, consistently meeting SLA targets</li>
+          <li>Collaborated with change management teams to plan, document, and execute infrastructure changes with minimal business disruption</li>
+          <li>Conducted post-incident reviews and maintained a runbook library to reduce resolution time for recurring issues</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag green">VMware vSphere</span><span class="tag green">Zabbix</span><span class="tag green">Nimsoft</span>
+          <span class="tag green">PowerShell</span><span class="tag green">Terraform</span><span class="tag green">ServiceNow</span>
+          <span class="tag green">Azure</span><span class="tag green">Windows Server</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- L1 / Data Engineer -->
+    <div class="timeline-item purple reveal">
+      <div class="job-card">
+        <div class="job-top">
+          <div>
+            <div class="job-title">L1 Cloud Engineer → Data Engineer</div>
+            <div class="job-company">SIFY Technologies Limited</div>
+          </div>
+          <span class="job-period">Jul 2024 – Aug 2025</span>
+        </div>
+        <p class="job-desc">Began as a Windows/cloud infrastructure engineer and pivoted into data engineering — building and maintaining ETL pipelines that powered business-critical dashboards.</p>
+        <ul class="job-bullets">
+          <li class="purple">Built and maintained scalable ETL pipelines processing millions of records daily using PySpark, significantly improving data reliability and reducing ingestion latency</li>
+          <li class="purple">Automated data workflow scheduling with Apache Airflow DAGs, cutting manual intervention and enabling fully hands-free daily operations</li>
+          <li class="purple">Delivered clean, validated datasets to Power BI dashboards consumed by business stakeholders for operational and strategic decision-making</li>
+          <li class="purple">Diagnosed and resolved pipeline failures, implemented retry logic and alerting to prevent data loss and SLA breaches</li>
+          <li>Administered Windows Server (2012/2016/2019) including installation, patching, performance tuning, and configuration hardening</li>
+          <li>Managed Active Directory — user/group provisioning, OU structure design, GPO implementation, and LDAP troubleshooting</li>
+          <li>Configured and maintained DNS, DHCP, and file services to ensure secure, highly available access across the network</li>
+          <li>Provisioned and managed VMs on Azure and AWS — including scaling, backup policies, and disaster recovery testing</li>
+          <li>Designed VNet/VPC architectures, managed NSG/Security Groups, and resolved network latency and connectivity issues</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag purple">PySpark</span><span class="tag purple">Apache Airflow</span><span class="tag purple">Power BI</span>
+          <span class="tag green">Azure</span><span class="tag green">AWS</span><span class="tag green">Active Directory</span>
+          <span class="tag green">Windows Server</span><span class="tag green">DNS/DHCP</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AR/VR Intern -->
+    <div class="timeline-item red reveal">
+      <div class="job-card">
+        <div class="job-top">
+          <div>
+            <div class="job-title">AR/VR Developer Intern</div>
+            <div class="job-company">Ingage Technologies Pvt. Ltd</div>
+          </div>
+          <span class="job-period">Oct 2022 – Jan 2023</span>
+        </div>
+        <p class="job-desc">Designed and built immersive AR/VR experiences from the ground up using Unity3D, applying XR UX principles and real-time 3D interaction design.</p>
+        <ul class="job-bullets">
+          <li class="red">Developed production-ready AR/VR applications with Unity3D using XR Interaction Toolkit, Vuforia, AR Foundation, and HTC Vive — delivering smooth real-time 3D environments</li>
+          <li class="red">Architected event-driven interaction systems and UI flows for quiz and maze game projects, implementing branching scene logic and dynamic score tracking</li>
+          <li class="red">Designed player locomotion, collision detection, and physics-based mechanics for responsive, immersive user experiences</li>
+          <li class="red">Applied spatial interaction design principles — gaze-based input, intuitive navigation, and comfort-focused VR UX — to minimize user disorientation</li>
+          <li class="red">Optimized runtime performance using Unity Profiler — reduced draw calls and managed prefab/asset pipelines to maintain target frame rates on VR hardware</li>
+          <li class="red">Delivered technical training sessions to college students on Unity game development and C# scripting fundamentals</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag red">Unity3D</span><span class="tag red">C#</span><span class="tag red">XR Toolkit</span>
+          <span class="tag red">Vuforia</span><span class="tag red">AR Foundation</span><span class="tag red">HTC Vive</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-header">
+        <div class="skill-icon cloud">☁</div>
+        <div class="skill-card-title">Cloud & Infrastructure</div>
+      </div>
+      <div class="skill-pills">
+        <span class="skill-pill">Microsoft Azure</span>
+        <span class="skill-pill">Amazon Web Services</span>
+        <span class="skill-pill">VMware vSphere</span>
+        <span class="skill-pill">VMware ESXi</span>
+        <span class="skill-pill">vCenter Server</span>
+        <span class="skill-pill">VNet / VPC</span>
+        <span class="skill-pill">NSG / Security Groups</span>
+        <span class="skill-pill">Backup & DR</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-header">
+        <div class="skill-icon cloud">🖥</div>
+        <div class="skill-card-title">Windows & AD Administration</div>
+      </div>
+      <div class="skill-pills">
+        <span class="skill-pill">Windows Server 2012/16/19</span>
+        <span class="skill-pill">Active Directory DS</span>
+        <span class="skill-pill">Group Policy (GPO)</span>
+        <span class="skill-pill">DNS & DHCP</span>
+        <span class="skill-pill">LDAP</span>
+        <span class="skill-pill">TCP/IP & Subnetting</span>
+        <span class="skill-pill">File Services</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-header">
+        <div class="skill-icon data">⚡</div>
+        <div class="skill-card-title">Data Engineering</div>
+      </div>
+      <div class="skill-pills">
+        <span class="skill-pill">Apache Spark / PySpark</span>
+        <span class="skill-pill">Apache Airflow</span>
+        <span class="skill-pill">Apache Kafka</span>
+        <span class="skill-pill">ETL Pipelines</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Pandas / NumPy</span>
+        <span class="skill-pill">Data Warehousing</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-header">
+        <div class="skill-icon dev">🛠</div>
+        <div class="skill-card-title">Scripting & DevOps</div>
+      </div>
+      <div class="skill-pills">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">PowerShell</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">Shell Scripting</span>
+        <span class="skill-pill">Terraform (IaC)</span>
+        <span class="skill-pill">Git & GitHub Actions</span>
+        <span class="skill-pill">CI/CD</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-header">
+        <div class="skill-icon cloud">📊</div>
+        <div class="skill-card-title">Monitoring & ITSM</div>
+      </div>
+      <div class="skill-pills">
+        <span class="skill-pill">Zabbix</span>
+        <span class="skill-pill">Nimsoft</span>
+        <span class="skill-pill">ServiceNow</span>
+        <span class="skill-pill">Incident Management</span>
+        <span class="skill-pill">Change Management</span>
+        <span class="skill-pill">Root Cause Analysis</span>
+        <span class="skill-pill">SLA Management</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-header">
+        <div class="skill-icon xr">🥽</div>
+        <div class="skill-card-title">AR/VR & Game Dev</div>
+      </div>
+      <div class="skill-pills">
+        <span class="skill-pill">Unity3D</span>
+        <span class="skill-pill">C#</span>
+        <span class="skill-pill">XR Interaction Toolkit</span>
+        <span class="skill-pill">Vuforia</span>
+        <span class="skill-pill">AR Foundation</span>
+        <span class="skill-pill">HTC Vive</span>
+        <span class="skill-pill">Unity Profiler</span>
+        <span class="skill-pill">Prompt Engineering</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-meta">
+        <span class="project-category">Data Engineering</span>
+        <span class="project-icon">🔁</span>
+      </div>
+      <div class="project-title">Real-Time Log Analytics Pipeline</div>
+      <p class="project-desc">End-to-end streaming pipeline ingesting and processing application logs with sub-minute latency for operational visibility.</p>
+      <ul class="project-bullets">
+        <li>Ingested high-throughput application log streams using Apache Kafka topics with configurable partitioning</li>
+        <li>Processed streams with PySpark Structured Streaming — computed error rate metrics, user activity trends, and anomaly signals</li>
+        <li>Stored aggregated outputs in a scalable data store and connected to monitoring dashboards for real-time operational visibility</li>
+        <li>Implemented fault-tolerant checkpointing and offset management to guarantee exactly-once processing semantics</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-chip">Apache Kafka</span><span class="tech-chip">PySpark</span>
+        <span class="tech-chip">Structured Streaming</span><span class="tech-chip">Python</span>
+        <span class="tech-chip">Dashboards</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-meta">
+        <span class="project-category">Cloud Automation</span>
+        <span class="project-icon">⚙️</span>
+      </div>
+      <div class="project-title">Infrastructure Automation & Monitoring</div>
+      <p class="project-desc">Automated VM lifecycle management on Azure with proactive resource monitoring and alerting.</p>
+      <ul class="project-bullets">
+        <li>Scripted VM provisioning, configuration, scaling, and teardown using PowerShell automation modules on Microsoft Azure</li>
+        <li>Implemented CPU, memory, and disk utilization alerting via Azure Monitor — reducing manual health checks and enhancing uptime</li>
+        <li>Created reusable runbooks and IaC templates to standardize environment builds across dev and production</li>
+        <li>Integrated alerts with ServiceNow to auto-generate incidents and route to on-call engineers without human triage delay</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-chip">Azure</span><span class="tech-chip">PowerShell</span>
+        <span class="tech-chip">Azure Monitor</span><span class="tech-chip">Terraform</span>
+        <span class="tech-chip">ServiceNow</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-meta">
+        <span class="project-category">Data Pipeline</span>
+        <span class="project-icon">🗄️</span>
+      </div>
+      <div class="project-title">Automated ETL Data Warehouse Pipeline</div>
+      <p class="project-desc">Designed and built an end-to-end ETL pipeline orchestrating data from multiple raw sources into a clean analytics layer.</p>
+      <ul class="project-bullets">
+        <li>Engineered PySpark transformation jobs to clean, validate, and enrich raw datasets from multiple heterogeneous sources</li>
+        <li>Orchestrated the pipeline with Apache Airflow DAGs — scheduling daily runs, managing dependencies, and alerting on failures</li>
+        <li>Delivered publication-ready datasets consumed by Power BI dashboards for executive reporting</li>
+        <li>Built data quality checks and row-count reconciliation at each pipeline stage to catch upstream anomalies early</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-chip">PySpark</span><span class="tech-chip">Airflow</span>
+        <span class="tech-chip">SQL</span><span class="tech-chip">Power BI</span>
+        <span class="tech-chip">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-meta">
+        <span class="project-category">AR/VR</span>
+        <span class="project-icon">🕵️</span>
+      </div>
+      <div class="project-title">Sherlock Holmes Quiz Game</div>
+      <p class="project-desc">Mystery-themed interactive quiz game in Unity3D with branching narrative and VR-optimised UI.</p>
+      <ul class="project-bullets">
+        <li>Designed dynamic question loading system with JSON-driven content, allowing non-developer content updates</li>
+        <li>Implemented branching storyline logic with scene transitions that adapt to player score and choices</li>
+        <li>Optimised all UI layouts for VR headset viewports — ensuring readable typography and ergonomic interaction zones</li>
+        <li>Integrated score tracking, leaderboard persistence, and end-game summary screens for full gameplay loop</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-chip">Unity3D</span><span class="tech-chip">C#</span>
+        <span class="tech-chip">XR Toolkit</span><span class="tech-chip">Vuforia</span>
+        <span class="tech-chip">UI Systems</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-meta">
+        <span class="project-category">Game Dev</span>
+        <span class="project-icon">🌀</span>
+      </div>
+      <div class="project-title">Maze Runner — 3D First-Person Game</div>
+      <p class="project-desc">Physics-driven first-person maze navigation game with procedural elements, spatial audio, and immersive lighting.</p>
+      <ul class="project-bullets">
+        <li>Built physics-based player controller with collision detection, movement clamping, and responsive interaction</li>
+        <li>Implemented procedural maze element generation for replayability and timer-based win/loss conditions</li>
+        <li>Designed atmospheric lighting rigs and spatial audio systems to heighten immersion and spatial awareness</li>
+        <li>Profiled and optimised GPU draw calls and asset LODs to maintain 72+ FPS on standalone VR hardware</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-chip">Unity3D</span><span class="tech-chip">C#</span>
+        <span class="tech-chip">Physics Engine</span><span class="tech-chip">Unity Profiler</span>
+        <span class="tech-chip">Spatial Audio</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-meta">
+        <span class="project-category">VMware / Cloud</span>
+        <span class="project-icon">🖥</span>
+      </div>
+      <div class="project-title">VMware vSphere Cluster Optimisation</div>
+      <p class="project-desc">End-to-end virtualization environment health improvement — consolidating resources and automating lifecycle operations.</p>
+      <ul class="project-bullets">
+        <li>Audited existing VMware clusters and identified CPU/memory overcommitment, reducing wastage through DRS policy tuning</li>
+        <li>Automated VM snapshot schedules and retention policies via PowerShell to prevent storage bloat</li>
+        <li>Configured HA and vMotion policies to enable zero-downtime host maintenance windows</li>
+        <li>Documented all environment configurations and created operational runbooks adopted by the wider team</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-chip">VMware vSphere</span><span class="tech-chip">ESXi</span>
+        <span class="tech-chip">vCenter</span><span class="tech-chip">PowerShell</span>
+        <span class="tech-chip">HA/DRS/vMotion</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Education & Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-certs-grid">
+    <div class="edu-card reveal">
+      <div class="sub-title">🎓 Degree</div>
+      <div class="edu-degree">Bachelor of Engineering<br>Computer Science & Engineering</div>
+      <div class="edu-school">Sri Sairam Engineering College, Chennai</div>
+      <div class="edu-meta">
+        <div class="edu-meta-item">
+          <span class="edu-meta-label">Year</span>
+          <span class="edu-meta-value">2020 – 2024</span>
+        </div>
+        <div class="edu-meta-item">
+          <span class="edu-meta-label">CGPA</span>
+          <span class="edu-meta-value highlight">8.7 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="sub-title">🏅 Certifications</div>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-badge">☁</div>
+          <div>
+            <div class="cert-name">Azure Fundamentals (AZ-900)</div>
+            <div class="cert-issuer">Microsoft</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-badge">🐍</div>
+          <div>
+            <div class="cert-name">Python Programming</div>
+            <div class="cert-issuer">Certified</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-badge">🗄</div>
+          <div>
+            <div class="cert-name">MySQL Database</div>
+            <div class="cert-issuer">Certified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div style="margin-top: 3rem;">
+    <div class="sub-title" style="margin-bottom:0">🌐 Languages</div>
+    <div class="languages-row">
+      <div class="lang-card reveal">
+        <div class="lang-name">Tamil</div>
+        <div class="lang-level">Native</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div>
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Professional</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div>
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">Japanese</div>
+        <div class="lang-level">Basic</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">Hindi</div>
+        <div class="lang-level">Basic</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">Telugu</div>
+        <div class="lang-level">Basic</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-headline">Let's build something<br><em style="font-family:'Fraunces',serif;font-style:italic;color:var(--accent)">remarkable</em> together</h2>
+    <p class="contact-sub">Open to cloud engineering, data engineering, and XR development roles. Based in Chennai — available for hybrid opportunities globally.</p>
+    <div class="contact-links">
+      <a href="mailto:subanandham09@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        subanandham09@gmail.com
+      </a>
+      <a href="tel:9566748158" class="contact-link">
+        <span class="contact-link-icon">📞</span>
+        +91 9566748158
+      </a>
+      <a href="https://www.linkedin.com/in/subanandham-e-r-21a8b8245/" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💼</span>
+        linkedin.com/in/subanandham-e-r-21a8b8245
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Subanandham E R</span>
+  <span style="color:var(--border)">Chennai, India 🇮🇳</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger reveal children
+  document.querySelectorAll('.skills-grid, .projects-grid').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.07}s`;
+    });
+  });
+</script>
+</body>
+</html>
